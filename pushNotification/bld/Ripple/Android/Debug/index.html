@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">     
+    <title>北昕小幫手</title>  
+    <style>
+        .error {
+           color:red;
+        }
+    </style>
+</head>
+<body >    
+    <!-- Cordova reference, this is added to your app when it's built. --> 
+    <script src="scripts/jquery-2.1.4.js"></script>
+    <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="scripts/jquery.validate.min.js"></script>
+    <link href="Content/Jquert_Theme.min.css" rel="stylesheet" />
+    <link href="Content/jquery.mobile.icons.min.css" rel="stylesheet" />
+    <link href="Content/jquery.mobile.structure-1.4.5.min.css" rel="stylesheet" />
+    <script src="scripts/sqlLiteDB.js"></script>
+    <script src="scripts/index.js"></script>
+    <div data-role="page" id="clinicPage" data-theme="a">
+        <div data-role="header">
+            <h1>北昕小幫手</h1>
+            <a href="#clinicPage_exit" data-icon="arrow-l" data-iconpos="notext" id="closeAPP">關閉</a>
+        </div>
+        <div data-role="content" data-theme="a">
+            <ul id="clinicList" data-filter="true" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">                
+            </ul>
+            <!--<ul data-role="listview" data-filter="true" id="clinicList" data-split-icon="delete" data-inset="true"></ul>-->
+            <a href="#addSettingPage" id="clinicPage_Add" data-role="button" data-transition="slidedown">新增診所設定</a>
+        </div>
+    </div>
+
+    <!--修改刪除設定 -->
+    <div id="settingPage" data-role="page" data-theme="a">
+        <div data-role="header" data-theme="a">
+            <!--<a href="#clinicPage" data-icon="home" data-iconpos="notext"></a>-->
+            <h1>設定</h1>
+            <a href="#clinicPage" data-transition="slideup" data-icon="arrow-l" data-iconpos="notext"></a>
+        </div>
+        <div data-role="content" data-theme="a">
+            <form id="editForm">
+                <label for="settingPage_clinicName">診所名稱</label>
+                <input type="text" data-clear-btn="true" name="clinicName" id="settingPage_clinicName" value="">
+                <label for="settingPage_clinicIP">診所IP</label>
+                <input type="text" data-clear-btn="true" name="clinicIP" id="settingPage_clinicIP" value="">
+                <label for="settingPage_user">登入帳號</label>
+                <input type="text" data-clear-btn="true" name="user" id="settingPage_user" value="">
+                <label for="settingPage_clinicName">密碼</label>
+                <input type="text" data-clear-btn="true" name="password" id="settingPage_password" value="">
+                <input type="hidden" value="" id="settingPage_hiddenClinic" /> <!--決定是否新增/刪改-->
+                <a href="#clinicPage" id="settingPage_add" data-role="button">新增</a>
+                <!--<a href="#clinicPage" id="settingPage_update" data-role="button" data-icon="grid">修改</a>-->
+                <a  id="settingPage_update" data-role="button" data-icon="grid">修改</a>
+                <a href="#clinicPage" id="settingPage_delete" data-role="button" data-icon="delete">刪除</a>
+            </form>
+        </div>
+        <div data-role="footer" data-theme="a"></div>
+    </div>
+
+    <!--新增設定 -->
+    <div id="addSettingPage" data-role="page" data-theme="a">
+        <div data-role="header">
+            <!--<a href="#clinicPage" data-icon="home" data-iconpos="notext"></a>-->
+            <h1>設定</h1>
+            <a href="#clinicPage" data-transition="slideup" data-icon="arrow-l" data-iconpos="notext"></a>
+        </div>
+        <div data-role="content" data-theme="a">
+            <form id="addForm">
+                <label for="addSettingPage_clinicName">診所名稱</label>
+                <input type="text" data-clear-btn="true" name="clinicName" id="addSettingPage_clinicName" value="">
+                <label for="addSettingPage_clinicIP">診所IP</label>
+                <input type="text" data-clear-btn="true" name="clinicIP" id="addSettingPage_clinicIP" value="">
+                <label for="addSettingPage_user">登入帳號</label>
+                <input type="text" data-clear-btn="true" name="user" id="addSettingPage_user" value="">
+                <label for="addSettingPage_clinicName">密碼</label>
+                <input type="text" data-clear-btn="true" name="password" id="addSettingPage_password" value="">
+                <!--<a href="#clinicPage" id="addSettingPage_add" data-role="button">新增</a>-->
+                <a id="addSettingPage_add" data-role="button">新增</a>
+            </form>
+        </div>
+        <div data-role="footer" data-theme="a"></div>
+    </div>
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>    
+</body>
+</html>

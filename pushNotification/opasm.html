@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>酷APP</title>  
+</head>
+<body>
+    <script src="scripts/jquery-2.1.4.js"></script>
+    <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="scripts/urlParameter.js"></script>
+    <link href="Content/jquery.mobile-1.4.5.min.css" rel="stylesheet" />
+    <div data-role="page" id="opasmPage" data-theme="b">
+        <div data-role="header">
+            <h1>TEST</h1>
+        </div>
+        <div data-role="content" data-theme="b">
+            TEST
+        </div>
+        <div data-role="footer" data-theme="b"></div>
+    </div> 
+</body>
+</html>
+<script>
+    $(document).delegate("#opasmPage", "pageshow", function () {
+        var sickNo = urlParameter.getUrlParameter('sickNo');
+        alert(sickNo);
+    });
+</script>

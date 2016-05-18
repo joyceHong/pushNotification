@@ -1,0 +1,68 @@
+﻿<div data-role="header">
+    <h1>健保歷史報表</h1>
+    <a href="#healthHistoryMenu" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menu</a>
+</div>
+<div data-role="content" data-theme="a">
+    <ul data-role="listview" class="ui-listview-outer" data-inset="false">
+        <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false" data-collapsed="false">
+            <h2>查詢申報年月</h2>
+            <fieldset data-role="fieldcontain">
+                <label for="healthHistoryPage_year">申報年</label>
+                <input type="number" id="healthHistoryPage_year" min="1999" max="9999" maxlength="4" />
+                <label for="healthHistoryPage_month">申報月</label>
+                <input type="number" id="healthHistoryPage_month" min="1" max="12" maxlength="2" />
+                <label for="healthHistory_doctor" class="select">醫師</label>
+                <select name="select-choice-1" id="healthHistory_doctor">
+                    <option value="all">全部醫師</option>
+                </select>
+            </fieldset>
+            <a href="#" id="healthHistory_search" data-role="button">查詢</a>
+        </li>
+    </ul>
+
+    <input type="hidden" id="healthHistoryPage_ClinicId" />
+
+    <ul data-role="listview" class="ui-listview-outer" data-inset="false">
+        <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false" data-collapsed="false">
+            <h2><font color="black">一.月參數</font></h2>
+            <div id="healthHistoryPage_one"></div>
+        </li>        
+    </ul>
+
+    <ul data-role="listview" class="ui-listview-outer" data-inset="false">
+        <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false" data-collapsed="true">
+            <h2><font color="black">二.月指標</font></h2>
+            <div id="healthHistoryPage_two" ></div>  
+        </li>
+    </ul>
+
+    <ul data-role="listview" class="ui-listview-outer" data-inset="false">
+        <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false" data-collapsed="true">
+            <h2><font color="black">三.季參數</font></h2>
+            <div id="healthHistoryPage_three"></div>  
+        </li>
+    </ul>
+
+    <ul data-role="listview" class="ui-listview-outer" data-inset="false">
+        <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false" data-collapsed="true">
+            <h2><font color="black">四.季指標</font></h2>
+            <div id="healthHistoryPage_four"></div>  
+        </li>
+    </ul>
+
+    <ul data-role="listview" class="ui-listview-outer" data-inset="false">
+        <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false" data-collapsed="true">
+            <h2><font color="black">五.排除項目</font></h2>
+            <div id="healthHistoryPage_five"></div>  
+        </li>
+    </ul>
+</div>
+<div data-role="panel" data-display="overlay" data-position="right" data-theme="a" id="healthHistoryMenu">
+    <ul data-role="listview">
+        <li data-icon="delete"><a href="#" data-rel="close">關閉選單</a></li>
+        <li><a href="patients.html" onclick="location.href = this.href + '?id=' + $('#healthHistoryPage_ClinicId').val(); return false;">首頁</a></li>
+        <li><a href="#listPatientPage" data-transition="slide">病患資料</a></li>        
+        <li><a href="#healthSummaryPage" data-transition="slide">健保彙總報表</a></li>
+        <li><a href="#healthHistoryPage" data-transition="slide">歷史指標查詢</a></li>
+    </ul>
+</div>

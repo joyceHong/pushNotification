@@ -1,0 +1,42 @@
+﻿<div data-role="header">
+    <h1>健保彙總報表</h1>
+    <a href="#healthSummaryMenu" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menu</a>
+</div>
+<div data-role="content" data-theme="a">
+    <ul data-role="listview" class="ui-listview-outer" data-inset="false">
+        <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false" data-collapsed="false">
+            <h2>健保收入條件設定</h2>
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <h3>
+                    <a href="#" id="healthSummary_start">開始日</a>
+                    <a href="#" data-role="button" id="healthSummary_start_preDay" data-icon="arrow-l" data-inline="true" data-mini="true">前一日</a>
+                    <a href="#" data-role="button" id="healthSummary_start_nextDay" data-icon="arrow-r" data-inline="true" data-mini="true" data-iconpos="right">後一日</a>
+                    <input type="date" id="healthSummary_startDate" /><br />
+                    <a href="#" id="healthSummary_end">結束日</a>
+                    <a href="#" data-role="button" id="healthSummary_end_preDay" data-icon="arrow-l" data-inline="true" data-mini="true">前一日</a>
+                    <a href="#" data-role="button" id="healthSummary_end_nextDay" data-icon="arrow-r" data-inline="true" data-mini="true" data-iconpos="right">後一日</a>
+                    <input type="date" id="healthSummary_endDate" />
+                </h3>
+            </fieldset>
+            <fieldset data-role="controlgroup">
+                <label for="healthSummary_doctor" class="select">醫師</label>
+                <select name="select-choice-1" id="healthSummary_doctor">
+                    <option value="all">全部醫師</option>
+                </select>
+            </fieldset>
+            <a href="#" id="healthSummary_search" data-role="button">查詢</a>
+        </li>
+    </ul>
+    <input type="hidden" id="healthSummaryPage_ClinicId" />
+
+    <div data-role="main" class="ui-content" id="healthSummaryPage_searchResult" />
+</div>
+<div data-role="panel" data-display="overlay" data-position="right" data-theme="a" id="healthSummaryMenu">
+    <ul data-role="listview">
+        <li data-icon="delete"><a href="#" data-rel="close">關閉選單</a></li>
+        <li><a href="patients.html" onclick="location.href = this.href + '?id=' + $('#healthSummaryPage_ClinicId').val(); return false;">首頁</a></li>
+        <li><a href="#listPatientPage" data-transition="slide">病患資料</a></li>
+        <li><a href="#healthSummaryPage" data-transition="slide">健保彙總報表</a></li>
+        <li><a href="#healthHistoryPage" data-transition="slide">歷史指標查詢</a></li>
+    </ul>
+</div>

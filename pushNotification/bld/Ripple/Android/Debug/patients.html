@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">     
+    <title></title>
+</head>
+<body>   
+    <script src="scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).bind("mobileinit", function () {
+            $.mobile.hashListeningEnabled = false; //ios 9 需求加上這行，否則會無法停留dialog
+        });
+    </script>
+    <script src="scripts/jquery.mobile-1.4.5.js"></script>  
+    <link href="Content/Jquert_Theme.min.css" rel="stylesheet" />
+    <link href="Content/jquery.mobile.icons.min.css" rel="stylesheet" />
+    <link href="Content/jquery.mobile.structure-1.4.5.min.css" rel="stylesheet" />      
+    <link href="css/jMobiileTable.css" rel="stylesheet" />
+    <!--約診資料-->
+    <div data-role="page" id="pregistPage" data-theme="a">
+        <div data-role="header">
+            <h1 id="pregistPage_clinicName">某某診所</h1>
+            <a href="index.html" data-icon="arrow-l" data-iconpos="notext" data-ajax="false">回診所列表</a>
+            <a href="#pregistMenu" data-icon="bars" data-iconpos="notext">Menu</a>
+        </div>
+        <div data-role="content" data-theme="a">
+            <h3>
+                <a href="#" data-role="button" id="preDay" data-icon="arrow-l" data-inline="true" data-mini="true">前一日</a>
+                <a href="#" id="today">今日約診</a>
+                <a href="#" data-role="button" id="nextDay" data-icon="arrow-r" data-inline="true" data-mini="true" data-iconpos="right">後一日</a>
+            </h3>
+            <input type="date" id="scheduleDay" />
+            <select name="select-choice-1" id="pregistPage_doctor">
+                <option value="all">全部醫師</option>
+            </select>
+            <ul data-role="listview" data-filter="true" id="pregistData" data-inset="true"></ul>
+            <img id="loading-image" src="images/loading.gif" style="display:none;position: absolute; top: 50%; left: 50%; margin-left: -50px; margin-top: -18px;z-index:1" />
+            <input type="hidden" id="pregistPage_doctorOptions">
+        </div>
+        <!--選單-->
+        <div data-role="panel" data-display="overlay" data-position="right" data-theme="a" id="pregistMenu">
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">關閉選單</a></li>
+                <li><a href="#pregistPage" data-transition="slide">首頁</a></li>
+                <li><a href="#listPatientPage" data-transition="slide">病患資料</a></li>
+                <li><a href="#healthSummaryPage" data-transition="slide">健保彙總報表</a></li>
+                <li><a href="#healthHistoryPage" data-transition="slide">歷史指標查詢</a></li>
+            </ul>
+        </div>
+        <input type="hidden" id="pregistPage_ClinicId" />
+    </div>
+
+    <!--病患列表 -->
+    <div data-role="page" id="listPatientPage" data-theme="a">
+        <div data-role="header">
+            <h1>病患查詢</h1>
+            <a href="#patientsMenu" data-icon="bars" data-iconpos="notext" class="ui-btn-right">Menu</a>
+        </div>
+        <div data-role="content">
+            <input type="text" id="listPatientPage_searchValue" maxlength="20" data-theme="a" /><a href="#" data-role="button" id="listPatientPage_search">查詢</a>
+            <ul data-role="listview" id="patientData" data-inset="true"></ul>
+            <img id="listPatientPage_loading" src="images/loading.gif" style="display:none;position: absolute; top: 50%; left: 50%; margin-left: -50px; margin-top: -18px;z-index:1" />
+        </div>
+        <!--選單-->
+        <div data-role="panel" data-display="overlay" data-position="right" data-theme="a" id="patientsMenu">
+            <ul data-role="listview">
+                <li data-icon="delete"><a href="#" data-rel="close">關閉選單</a></li>
+                <li><a href="patients.html" onclick="location.href = this.href + '?id=' + $('#pregistPage_ClinicId').val(); return false;" >首頁</a></li>
+                <li><a href="#listPatientPage" data-transition="slide">病患資料</a></li>
+                <li><a href="#healthSummaryPage" data-transition="slide">健保彙總報表</a></li>
+                <li><a href="#healthHistoryPage" data-transition="slide">歷史指標查詢</a></li>
+            </ul>
+        </div>
+    </div>    
+
+    <!--病患基本資料-->
+    <div data-role="page" id="patientPage" data-theme="a" >
+        <div data-role="header">
+            <h3>病患基本資料</h3>
+            <input type="hidden" id="patientPage_sickNo">
+            <input type="hidden" id="patientPage_clinicIP" />
+            <input type="hidden" id="patientPage_user" />
+            <input type="hidden" id="patientPage_password" />
+            <input type="hidden" id="patientPage_pregistDoctorID" />
+            <input type="hidden" id="patientPage_pregistIkey" />
+        </div>
+        <div data-role="content">
+            <div data-role="fieldcontain">
+                <label for="patientPage_name">病患姓名  </label>
+                <label id="patientPage_name"></label>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="patientPage_birthday">生日  </label>
+                <label id="patientPage_birthday" data-inline="true"></label>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="patientPage_addr">住址  </label>
+                <label id="patientPage_addr"></label>
+            </div>
+
+
+            <div data-role="fieldcontain">
+                <label for="patientPage_tel">電話  </label>
+                <input type="tel" id="patientPage_tel">
+            </div>
+
+            <div data-role="fieldcontain">
+                <label for="patientPage_mobile">行動電話  </label>
+                <input type="tel" id="patientPage_mobile" readonly>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="patientPage_pregistDate">約診的日期 時間  </label>
+                <input type="text" readonly id="patientPage_pregistDate">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="patientPage_pregistRequireTime">約診需時  </label>
+                <input type="text" readonly id="patientPage_pregistRequireTime">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="patientPage_pregistContext">約診的備註  </label>
+                <textarea rows="4" readonly id="patientPage_pregistContext"></textarea>
+            </div>
+            <div data-role="fieldcontain">
+                <a href="#editPregistPage" data-transition="fade" id="patientPage_editPregist" data-role="button" data-rel="dialog">修改約診</a>
+                <a href="#opasmDialog" data-transition="fade" id="patientPage_viewOpasm" data-role="button" data-rel="dialog">調閱病歷</a>
+            </div>
+        </div>
+        <div data-role="footer">
+            <h3></h3>
+        </div>
+    </div>
+
+    <!--調閱病歷 -->
+    <div data-role="page" id="opasmDialog" data-theme="a">
+        <div data-role="header">
+            <h3><label id="opasmDialog_patientName"></label></h3>
+        </div>
+        <div data-role="content">
+            <ul data-role="listview" class="ui-listview-outer" data-inset="false">
+                <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false" data-collapsed="false">
+                    <h2>請輸入您的條件</h2>
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <h3>
+                            <a href="#" id="opasmDialog_before3Month">起始日</a>
+                            <a href="#" data-role="button" id="opasmDialogStart_preDay" data-icon="arrow-l" data-inline="true" data-mini="true">前一日</a>
+                            <a href="#" data-role="button" id="opasmDialogStart_nextDay" data-icon="arrow-r" data-inline="true" data-mini="true" data-iconpos="right">後一日</a>
+                            <input type="date" id="opasmDialog_startDate" /><br />
+                            <a href="#" id="opasmDialog_today">結束日</a>
+                            <a href="#" data-role="button" id="opasmDialogEnd_preDay" data-icon="arrow-l" data-inline="true" data-mini="true">前一日</a>
+                            <a href="#" data-role="button" id="opasmDialogEnd_nextDay" data-icon="arrow-r" data-inline="true" data-mini="true" data-iconpos="right">後一日</a>
+                            <input type="date" id="opasmDialog_endDate" /><br />
+                            <a href="#" id="opasmDialog_search" data-role="button">查詢</a>
+                        </h3>
+                    </fieldset>
+                </li>
+            </ul>
+            <div data-role="fieldcontain" id="opasmDIV"></div>
+        </div>
+        <div data-role="footer">
+        </div>
+    </div>       
+
+    <!--修改約診 -->
+    <div data-role="page" id="editPregistPage" data-theme="a">
+    </div>
+  
+    <!--健保彙總收入 -->
+    <div data-role="page" id="healthSummaryPage" data-theme="a">
+    </div>
+
+    <!--申報歷史表 -->
+    <div data-role="page" id="healthHistoryPage" data-theme="a">
+    </div>
+
+    <script src="scripts/aes.js"></script>
+    <script src="scripts/aesEncrytDecry.js"></script>    
+    <script src="scripts/date.js"></script>
+    <script src="scripts/sqlLiteDB.js"></script>    
+    <script src="scripts/getUrlParameter.js"></script>
+    <script src="scripts/patients.js"></script>
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+</body>
+</html>
